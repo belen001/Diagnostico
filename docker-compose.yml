@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  visualizer:
+    build: ./visualizer
+    ports:
+      - "5000:5000"
+    environment:
+      - TOP_N=10
+
+  miner:
+    build: ./miner
+    depends_on:
+      - visualizer
+    environment:
+      - VISUALIZER_URL=http://visualizer:5000/words
+      # - GITHUB_TOKEN=tu_token_opcional
